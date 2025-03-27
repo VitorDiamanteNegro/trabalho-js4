@@ -1,60 +1,71 @@
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #e0f7fa;
+    background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
 }
 
 .container {
-    background: #ffffff;
+    background: white;
     padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     text-align: center;
-    width: 300px;
+    width: 320px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.container:hover {
+    transform: scale(1.05);
 }
 
 h1 {
     color: #00796b;
     margin-bottom: 20px;
+    font-size: 24px;
 }
 
 label {
     font-weight: bold;
     display: block;
-    margin: 10px 0 5px;
+    margin: 12px 0 5px;
+    color: #004d40;
 }
 
 input, select, button {
     margin: 10px 0;
-    padding: 10px;
+    padding: 12px;
     width: 100%;
     border: 2px solid #00796b;
-    border-radius: 5px;
+    border-radius: 8px;
     font-size: 16px;
+    transition: all 0.3s ease-in-out;
 }
 
-input:focus, select:focus, button:focus {
-    outline: none;
+input:focus, select:focus {
     border-color: #004d40;
+    box-shadow: 0 0 10px rgba(0, 121, 107, 0.5);
 }
 
 button {
     background-color: #00796b;
     color: white;
     cursor: pointer;
-    transition: background-color 0.3s;
+    font-weight: bold;
+    transition: background 0.3s, transform 0.2s;
 }
 
 button:hover {
     background-color: #004d40;
+    transform: scale(1.05);
 }
 
 #result {
@@ -62,4 +73,5 @@ button:hover {
     font-size: 18px;
     font-weight: bold;
     color: #d32f2f;
+    opacity: 0.9;
 }
