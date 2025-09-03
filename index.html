@@ -1,30 +1,49 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jogo de Ímpar ou Par</title>
+    <title>Zumbi Survivor</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Jogo de Ímpar ou Par</h1>
-        <label for="number">Escolha um número (0-10):</label>
-        <input type="number" id="number" min="0" max="10">
+    <div id="game-container">
+        <div id="custom-cursor"></div>
+        <div id="player"></div>
         
-        <div>
-            <label for="choice">Escolha:</label>
-            <select id="choice">
-                <option value="par">Par</option>
-                <option value="impar">Ímpar</option>
-            </select>
+        <div id="ui">
+            <h2>Nível: <span id="level">1</span></h2>
+            <p>XP: <span id="xp">0</span>/<span id="xp-needed">10</span></p>
+            <p>Vida: <span id="health">100</span></p>
+            <p>Tempo: <span id="time">00:00</span></p>
         </div>
         
-        <button id="playButton">Jogar</button>
+        <div id="level-up-screen">
+            <h2>Subiu de Nível!</h2>
+            <p>Escolha um poder:</p>
+            <div class="power-option" onclick="selectPower(0)">
+                <h3>Disparo Duplo</h3>
+                <p>Atira duas balas de cada vez</p>
+            </div>
+            <div class="power-option" onclick="selectPower(1)">
+                <h3>Velocidade de Movimento</h3>
+                <p>Aumenta sua velocidade em 20%</p>
+            </div>
+            <div class="power-option" onclick="selectPower(2)">
+                <h3>Regeneração</h3>
+                <p>Recupera 1 de vida a cada 5 segundos</p>
+            </div>
+        </div>
         
-        <div id="result"></div>
+        <div id="game-over">
+            <h2>Game Over</h2>
+            <p>Você sobreviveu por <span id="survived-time">00:00</span></p>
+            <p>Zumbis mortos: <span id="zombies-killed">0</span></p>
+            <p>Nível alcançado: <span id="final-level">1</span></p>
+            <button onclick="restartGame()">Jogar Novamente</button>
+        </div>
     </div>
-    
+
     <script src="script.js"></script>
 </body>
 </html>

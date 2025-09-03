@@ -1,77 +1,152 @@
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background-color: #111;
+    color: #fff;
+    overflow: hidden;
+    cursor: none;
+}
+
+#game-container {
+    position: relative;
+    width: 100vw;
     height: 100vh;
+    background-color: #1a1a2e;
+    background-image: radial-gradient(#16213e 1px, transparent 2px);
+    background-size: 30px 30px;
+    overflow: hidden;
 }
 
-.container {
-    background: white;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+#player {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #e94560;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px #e94560;
+    z-index: 100;
+}
+
+.zombie {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background-color: #0f3460;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    transform: translate(-50%, -50%);
+    z-index: 90;
+}
+
+.bullet {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background-color: #f0f0f0;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 80;
+}
+
+.xp-orb {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #00ff9d;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 70;
+    animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+    from { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+    to { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+}
+
+#ui {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 200;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#level-up-screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(10, 10, 30, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #e94560;
+    z-index: 300;
     text-align: center;
-    width: 320px;
-    transition: transform 0.3s ease-in-out;
+    display: none;
+    width: 80%;
+    max-width: 400px;
 }
 
-.container:hover {
-    transform: scale(1.05);
-}
-
-h1 {
-    color: #00796b;
-    margin-bottom: 20px;
-    font-size: 24px;
-}
-
-label {
-    font-weight: bold;
-    display: block;
-    margin: 12px 0 5px;
-    color: #004d40;
-}
-
-input, select, button {
-    margin: 10px 0;
-    padding: 12px;
-    width: 100%;
-    border: 2px solid #00796b;
+.power-option {
+    background-color: #16213e;
+    margin: 10px;
+    padding: 15px;
     border-radius: 8px;
-    font-size: 16px;
-    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    transition: all 0.2s;
 }
 
-input:focus, select:focus {
-    border-color: #004d40;
-    box-shadow: 0 0 10px rgba(0, 121, 107, 0.5);
+.power-option:hover {
+    background-color: #1a1a2e;
+    transform: scale(1.05);
+    border: 1px solid #e94560;
+}
+
+#game-over {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(10, 10, 30, 0.95);
+    padding: 30px;
+    border-radius: 10px;
+    border: 2px solid #e94560;
+    z-index: 400;
+    text-align: center;
+    display: none;
 }
 
 button {
-    background-color: #00796b;
+    background-color: #e94560;
     color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border-radius: 5px;
     cursor: pointer;
-    font-weight: bold;
-    transition: background 0.3s, transform 0.2s;
+    font-size: 16px;
+    transition: background-color 0.3s;
 }
 
 button:hover {
-    background-color: #004d40;
-    transform: scale(1.05);
+    background-color: #ff6b81;
 }
 
-#result {
-    margin-top: 20px;
-    font-size: 18px;
-    font-weight: bold;
-    color: #d32f2f;
-    opacity: 0.9;
+#custom-cursor {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 500;
+    pointer-events: none;
 }
