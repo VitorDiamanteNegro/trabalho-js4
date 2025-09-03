@@ -4,7 +4,8 @@ let player = {
     y: window.innerHeight / 2,
     speed: 5,
     health: 100,
-    maxHealth: 100
+    maxHealth: 100,
+    direction: 1 // 1 para direita, -1 para esquerda
 };
 
 let gameState = {
@@ -32,8 +33,7 @@ let lastRegeneration = 0;
 // Inicialização do jogo
 function initGame() {
     // Posicionar o jogador
-    document.getElementById('player').style.left = player.x + 'px';
-    document.getElementById('player').style.top = player.y + 'px';
+    updatePlayerPosition();
     
     // Iniciar loops do jogo
     setInterval(gameLoop, 1000/60); // 60 FPS
@@ -46,6 +46,20 @@ function initGame() {
     
     // Iniciar a regeneração de vida se o poder estiver ativo
     setInterval(regenerateHealth, 5000);
+}
+
+// Atualizar posição visual do jogador
+function updatePlayerPosition() {
+    const playerElement = document.getElementById('player');
+    playerElement.style.left = player.x + 'px';
+    playerElement.style.top = player.y + 'px';
+    
+    // Virar o personagem na direção do movimento
+    if (player.direction === -1) {
+        playerElement.style.transform = 'translate(-50%, -50%) scaleX(-1)';
+    } else {
+        playerElement.style.transform = 'translate(-50%, -50%) scaleX(1)';
+    }
 }
 
 // Loop principal do jogo
@@ -67,6 +81,13 @@ function movePlayer(e) {
     document.getElementById('custom-cursor').style.left = e.clientX + 'px';
     document.getElementById('custom-cursor').style.top = e.clientY + 'px';
     
+    // Determinar direção do personagem
+    if (e.clientX > player.x) {
+        player.direction = 1;
+    } else if (e.clientX < player.x) {
+        player.direction = -1;
+    }
+    
     // Calcular a direção do movimento
     const dx = e.clientX - player.x;
     const dy = e.clientY - player.y;
@@ -78,8 +99,7 @@ function movePlayer(e) {
         player.y += (dy / distance) * player.speed;
         
         // Atualizar a posição visual do jogador
-        document.getElementById('player').style.left = player.x + 'px';
-        document.getElementById('player').style.top = player.y + 'px';
+        updatePlayerPosition();
     }
 }
 
@@ -293,8 +313,7 @@ function checkCollisions() {
             player.y += dy * 2;
             
             // Atualizar posição visual
-            document.getElementById('player').style.left = player.x + 'px';
-            document.getElementById('player').style.top = player.y + 'px';
+            updatePlayerPosition();
             
             // Verificar se o jogador morreu
             if (player.health <= 0) {
@@ -464,7 +483,8 @@ function restartGame() {
         y: window.innerHeight / 2,
         speed: 5,
         health: 100,
-        maxHealth: 100
+        maxHealth: 100,
+        direction: 1
     };
     
     gameState = {
@@ -485,8 +505,7 @@ function restartGame() {
     };
     
     // Reposicionar o jogador
-    document.getElementById('player').style.left = player.x + 'px';
-    document.getElementById('player').style.top = player.y + 'px';
+    updatePlayerPosition();
     
     // Esconder telas
     document.getElementById('game-over').style.display = 'none';
